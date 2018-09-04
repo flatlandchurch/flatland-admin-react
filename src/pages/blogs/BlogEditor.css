@@ -1,0 +1,12 @@
+.blog-form {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shuffle-pic {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    z-index: 401;
+}

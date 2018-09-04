@@ -1,0 +1,59 @@
+.card {
+  margin-top: 3rem;
+  top: -50px;
+  z-index: 400;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no-nudge {
+  top: 0;
+}
+
+.publish-bar {
+  width: 100%;
+  display: flex;
+}
+
+.publish-bar button {
+  margin-right: 16px;
+}
+
+.card-body {
+  padding: 40px;
+}
+
+img {
+  object-position: center center;
+}
+
+table {
+  width: 100%;
+}
+
+table td {
+  padding: 20px 0;
+}
+
+td:not(:first-child) {
+  text-align: right;
+}
+
+.table-publish-indicator em {
+  color: #f00;
+}
+
+.menu-toggle {
+  width: 30px;
+  display: block;
+  margin: 40px;
+}
+
+.menu-toggle span {
+  width: 100%;
+  display: block;
+  height: 3px;
+  background: #111;
+  margin: 6px 0;
+}
