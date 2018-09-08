@@ -7,6 +7,7 @@ import BlogList from '../pages/blogs/BlogList';
 const routes = [
   { path: /\/blog\/([\w\s\d-]*)/, component: BlogEditor },
   { path: /\/blog/, component: BlogList, title: 'Blog Posts | Flatland Church Admin' },
+  { path: /\//, component: () => (<div />) },
 ];
 
 export default class Router extends React.Component {

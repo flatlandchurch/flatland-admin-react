@@ -4,6 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      const config = {
+        apiKey: "AIzaSyD-k4hwSlh70enDXsZQbGJLumTp8oRVrCk",
+        authDomain: "flatland-api.firebaseapp.com",
+        databaseURL: "https://flatland-api.firebaseio.com",
+        projectId: "flatland-api",
+        storageBucket: "flatland-api.appspot.com",
+        messagingSenderId: "851671163539"
+      };
+      firebase.initializeApp(config);
+    </script>
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/

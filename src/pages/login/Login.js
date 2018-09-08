@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   TextField,
   Button,
 } from '@flatland/chokhmah';
 
-export default class Login extends React.Component {
-  static propTypes = {
-    onLogin: PropTypes.func.isRequired,
-  };
+import updateAdminToken from '../../utils/updateAdminToken';
+import getAdminData from '../../utils/getAdminData';
+import storeAdminData from '../../utils/storeAdminData';
 
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,13 +30,12 @@ export default class Login extends React.Component {
         this.state.email,
         this.state.password,
       )
-      .then((user) => window.firebase.database().ref(`users/${user.user.uid}`)
-          .once('value')
-          .then(data => data.val()))
-      .then((user) => {
-        window.localStorage.setItem('flatland:adminUser', JSON.stringify(user));
-        return this.props.onLogin(user);
-      })
+      .then((user) => getAdminData(user.user.uid)
+        .then(storeAdminData(user.user.uid))
+        .then(() => {
+          updateAdminToken(user.user.uid);
+          window.location.href = '/dashboard';
+        }))
       .catch((err) => {
         if (err.message.includes('email')) {
           return this.setState({

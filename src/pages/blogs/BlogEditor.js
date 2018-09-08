@@ -8,6 +8,7 @@ import {
   FormField,
   Jumbotron,
   Breadcrumbs,
+  Loading,
 } from '@flatland/chokhmah';
 import SimpleMDE from 'simplemde';
 import moment from 'moment';
@@ -19,8 +20,7 @@ import './BlogEditor.css';
 
 export default class BlogEditor extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    match: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -38,11 +38,16 @@ export default class BlogEditor extends React.Component {
       imageUrl: '',
       oldData: {},
       saving: false,
+      loading: true,
+      hideLoader: false,
     };
-    this.typeTitle = props.type === 'edit' ? 'Edit' : 'Create';
+    this.typeTitle = props.match.params.permalink === 'new' ? 'Create' : 'Edit';
   }
 
   componentDidMount() {
+    if (this.typeTitle === 'Create') {
+      this.setState({ loading: false });
+    }
     this.setState({
       mde: new SimpleMDE({
         element: document.getElementById('editor'),
@@ -51,7 +56,7 @@ export default class BlogEditor extends React.Component {
     });
 
     if (this.props.id !== 'new') {
-      window.firebase.database().ref(`blogContents/${this.props.id}`)
+      window.firebase.database().ref(`blogContents/${this.props.match.params.permalink}`)
         .once('value')
         .then(data => data.val())
         .then(data => {
@@ -69,6 +74,7 @@ export default class BlogEditor extends React.Component {
             imageUrl: data.image,
             hasSavedImage: Boolean(data.image),
             oldData: data,
+            loading: false,
           });
         });
     }
@@ -81,7 +87,7 @@ export default class BlogEditor extends React.Component {
     this.setState({ saving: true });
     const user = JSON.parse(window.localStorage.getItem('flatland:adminUser'));
 
-    if (this.props.type === 'create') {
+    if (this.typeTitle === 'Create') {
       const data = {
         approved: true,
         author: {
@@ -196,11 +202,19 @@ export default class BlogEditor extends React.Component {
     }
   };
 
+  hideLoader = () => {
+    this.setState({ hideLoader: true });
+  };
+
   render() {
-    const shouldShowPublish = this.props.type === 'create' ||
-      (this.props.type === 'edit' && !this.state.published);
+    const shouldShowPublish = this.typeTitle === 'Create' ||
+      (this.typeTitle === 'Edit' && !this.state.published);
     return (
       <React.Fragment>
+        {
+          !this.state.hideLoader &&
+            <Loading complete={!this.state.loading} onComplete={this.hideLoader} />
+        }
         {
           !this.state.hasSavedImage && Boolean(this.state.images.length) &&
           <div className="shuffle-pic">
