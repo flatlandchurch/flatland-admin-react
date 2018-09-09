@@ -59,7 +59,7 @@ jobs:
       - *restore_node_modules
       - *restore_built_packages
       - run: yarn build
-      - run: git clone --single-branch git@github.com:flatland/flatland-admin-react-public.git --depth=1
+      - run: git clone --single-branch git@github.com:flatlandchurch/flatland-admin-react-public.git --depth=1
       - run:
           command: git checkout -B $CIRCLE_BRANCH && rm -rf build
           working_directory: admin-public
