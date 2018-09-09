@@ -63,7 +63,7 @@ jobs:
       - run:
           command: git checkout -B $CIRCLE_BRANCH && rm -rf build
           working_directory: flatland-admin-react-public
-      - run: cp -R build/ agility-public/
+      - run: cp -R build/ flatland-admin-react-public/
       - run:
           command: git config user.email "mubatt@wyopub.com" && git config user.name "$CIRCLE_USERNAME" && git config push.default current
           working_directory: flatland-admin-react-public
