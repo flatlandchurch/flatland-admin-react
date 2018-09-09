@@ -62,20 +62,20 @@ jobs:
       - run: git clone --single-branch git@github.com:flatlandchurch/flatland-admin-react-public.git --depth=1
       - run:
           command: git checkout -B $CIRCLE_BRANCH && rm -rf build
-          working_directory: admin-public
+          working_directory: flatland-admin-react-public
       - run: cp -R build/ agility-public/
       - run:
           command: git config user.email "mubatt@wyopub.com" && git config user.name "$CIRCLE_USERNAME" && git config push.default current
-          working_directory: admin-public
+          working_directory: flatland-admin-react-public
       - run:
           command: git add .
-          working_directory: admin-public
+          working_directory: flatland-admin-react-public
       - run:
           command: git diff --quiet && git diff --staged --quiet && echo "No changes to commit" || git commit -am "Automatic build from CircleCI"
-          working_directory: admin-public
+          working_directory: flatland-admin-react-public
       - run:
           command: git push -f
-          working_directory: admin-public
+          working_directory: flatland-admin-react-public
 
 workflows:
   version: 2
