@@ -17,7 +17,6 @@ export default class Page extends React.Component {
       menuIsOpen: false,
       user: {},
     };
-    this.menuOptions = getMenu();
   }
 
   componentDidMount() {
@@ -65,7 +64,7 @@ export default class Page extends React.Component {
         {
           this.state.menuIsOpen &&
           <Menu
-            menuItems={this.menuOptions}
+            menuItems={getMenu()}
             onClick={this.toggleMenu}
           />
         }
