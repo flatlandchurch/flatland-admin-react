@@ -113,10 +113,10 @@ export default class BlogEditor extends React.Component {
         }),
       };
       window.firebase.database()
-        .ref(`blogContentsTest/${data.permalink}`)
+        .ref(`blogContents/${data.permalink}`)
         .set(data, () => {
           window.firebase.database()
-            .ref(`blogMetaTest/${data.date}`)
+            .ref(`blogMeta/${data.date}`)
             .set({
               approved: data.approved,
               author: user.name,
@@ -127,7 +127,21 @@ export default class BlogEditor extends React.Component {
               permalink: data.permalink,
             }, () => {
               this.setState({ saving: false });
-              window.location.href = `/blog/${data.permalink}`
+              if (this.state.category && this.state.category === 'devotionals') {
+                fetch('https://api.flatlandchurch.com/v2/emails/devotional?key=202f1c42-7054-46ee-8ca2-ddc85f9c789b', {
+                  body: JSON.stringify({
+                    permalink: data.permalink,
+                    userId: JSON.parse(window.localStorage.getItem('flatland:adminUser') || '{}').id
+                  }),
+                  headers: {
+                    'content-type': 'application/json',
+                  }
+                }).then(() => {
+                  window.location.href = `/blog/${data.permalink}`;
+                });
+              } else {
+                window.location.href = `/blog/${data.permalink}`;
+              }
             });
         });
     } else {
@@ -272,7 +286,12 @@ export default class BlogEditor extends React.Component {
                 </Button>
                 {
                   shouldShowPublish &&
-                    <Button context="primary">Publish</Button>
+                    <Button
+                      context="primary"
+                      disabled={this.state.saving}
+                    >
+                      Publish
+                    </Button>
                 }
               </div>
             </form>
