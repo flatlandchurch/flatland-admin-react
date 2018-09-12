@@ -80,10 +80,8 @@ export default class BlogEditor extends React.Component {
     }
   }
 
-  handleSave = (e) => {
-    if (e) {
-      e.preventDefault();
-    }
+  handleSave = (publish) => (e) => {
+    e.preventDefault();
     this.setState({ saving: true });
     const user = JSON.parse(window.localStorage.getItem('flatland:adminUser'));
 
@@ -102,7 +100,7 @@ export default class BlogEditor extends React.Component {
           author: get(this.state.image, 'user.name', ''),
           unsplash: 'https://unsplash.com/?utm_sourc=flatland-church&utm_medium=referral',
         },
-        published: false,
+        published: publish,
         title: this.state.title,
         topics: {
           [this.state.category]: true,
@@ -127,20 +125,23 @@ export default class BlogEditor extends React.Component {
               permalink: data.permalink,
             }, () => {
               this.setState({ saving: false });
-              if (this.state.category && this.state.category === 'devotionals') {
-                fetch('https://api.flatlandchurch.com/v2/emails/devotional?key=202f1c42-7054-46ee-8ca2-ddc85f9c789b', {
-                  body: JSON.stringify({
-                    permalink: data.permalink,
-                    userId: JSON.parse(window.localStorage.getItem('flatland:adminUser') || '{}').id
-                  }),
-                  headers: {
-                    'content-type': 'application/json',
-                  }
-                }).then(() => {
+              if (publish) {
+                if (this.state.category && this.state.category === 'devotionals') {
+                  fetch('https://api.flatlandchurch.com/v2/emails/devotional?key=202f1c42-7054-46ee-8ca2-ddc85f9c789b', {
+                    body: JSON.stringify({
+                      permalink: data.permalink,
+                      userId: JSON.parse(window.localStorage.getItem('flatland:adminUser') || '{}').id
+                    }),
+                    method: 'POST',
+                    headers: {
+                      'content-type': 'application/json',
+                    }
+                  }).then(() => {
+                    window.location.href = `/blog/${data.permalink}`;
+                  });
+                } else {
                   window.location.href = `/blog/${data.permalink}`;
-                });
-              } else {
-                window.location.href = `/blog/${data.permalink}`;
+                }
               }
             });
         });
@@ -279,7 +280,7 @@ export default class BlogEditor extends React.Component {
               <div className="publish-bar">
                 <Button
                   context={shouldShowPublish ? 'subtle' : 'primary'}
-                  onClick={this.handleSave}
+                  onClick={this.handleSave(false)}
                   disabled={this.state.saving}
                 >
                   Save
@@ -289,6 +290,7 @@ export default class BlogEditor extends React.Component {
                     <Button
                       context="primary"
                       disabled={this.state.saving}
+                      onClick={this.handleSave(true)}
                     >
                       Publish
                     </Button>
