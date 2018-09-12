@@ -132,6 +132,7 @@ export default class BlogEditor extends React.Component {
                       permalink: data.permalink,
                       userId: JSON.parse(window.localStorage.getItem('flatland:adminUser') || '{}').id
                     }),
+                    method: 'POST',
                     headers: {
                       'content-type': 'application/json',
                     }
