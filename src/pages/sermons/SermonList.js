@@ -1,31 +1,30 @@
 import React from 'react';
-import moment from 'moment';
+import { Loading, Button, Lozenge } from '@flatland/chokhmah';
 import sortBy from 'lodash-es/sortBy';
-import { Loading, Button } from '@flatland/chokhmah';
+import moment from 'moment/moment';
 import { Link } from 'react-router-dom';
 
-export default class BlogList extends React.Component {
+export default class SermonList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
       loading: true,
       hideLoader: false,
+      sermons: [],
     };
   }
 
   componentDidMount() {
-    window.firebase.database().ref('blogMeta')
+    window.firebase.database().ref('sermons')
       .once('value')
       .then(data => data.val())
       .then(data => Object.keys(data)
         .map(key => Object.assign({}, data[key], {
-          date: key,
-        }))
-        .filter(d => !d.topics.legacy))
+          permalink: key,
+        })))
       .then(data => {
         this.setState({
-          posts: sortBy(data, ['date']).reverse(),
+          sermons: sortBy(data, ['preached']).reverse(),
           loading: false,
         });
       });
@@ -45,27 +44,32 @@ export default class BlogList extends React.Component {
         <div className="card card-elevation--1 no-nudge">
           <div className="card-body">
             <header>
-              <h3>Blog Posts</h3>
+              <h3>Sermons</h3>
               <div className="spacer" />
-              <Button onClick={() => window.location.href = '/blog/new'}>New</Button>
+              <Button onClick={() => window.location.href = '/sermons/new'}>New</Button>
             </header>
             <table className="list">
               <tbody>
               {
-                Boolean(this.state.posts.length) &&
-                  this.state.posts.map(post => (
-                    <tr key={post.date}>
-                      <td><Link to={`/blog/${post.permalink}`}>{post.title}</Link></td>
-                      <td>{moment.unix(parseInt(post.date, 10)).format('M/D/YYYY')}</td>
-                      <td className="table-publish-indicator">{post.published ? 'Published' : <em>Draft</em>}</td>
-                    </tr>
-                  ))
+                Boolean(this.state.sermons.length) &&
+                this.state.sermons.map(post => (
+                  <tr key={post.permalink}>
+                    <td><Link to={`/sermons/${post.permalink}`}>{post.title}</Link></td>
+                    <td>
+                      {
+                        post.series && post.series.title &&
+                        <Lozenge label={post.series.title} />
+                      }
+                    </td>
+                    <td>{moment.unix(parseInt(post.preached, 10)).format('M/D/YYYY')}</td>
+                  </tr>
+                ))
               }
               </tbody>
             </table>
           </div>
         </div>
       </React.Fragment>
-    );
+    )
   }
 }

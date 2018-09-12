@@ -6,6 +6,9 @@ import cx from 'classnames';
 import Login from './login/Login';
 import BlogList from './blogs/BlogList';
 import BlogEditor from './blogs/BlogEditor';
+import SermonList from './sermons/SermonList';
+import SermonEditor from './sermons/SermonEditor';
+
 import Lock from '../icons/Lock';
 import getAdminToken from '../utils/getAdminToken';
 import getMenu from '../utils/getMenu';
@@ -71,6 +74,8 @@ export default class Page extends React.Component {
         <Route path="/dashboard" render={() => (<div style={{textAlign: 'center'}}><h1>Flatland Admin</h1></div>)}/>
         <Route exact path="/blog" component={BlogList}/>
         <Route path="/blog/:permalink" component={BlogEditor}/>
+        <Route exact path="/sermons" component={SermonList} />
+        <Route path="/sermons/:permalink" component={SermonEditor} />
       </React.Fragment>
     );
 
