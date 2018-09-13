@@ -36,15 +36,15 @@ img {
   object-position: center center;
 }
 
-table {
+table.list {
   width: 100%;
 }
 
-table td {
+table.list td {
   padding: 20px 0;
 }
 
-td:not(:first-child) {
+table.list td:not(:first-child) {
   text-align: right;
 }
 
@@ -121,4 +121,16 @@ td:not(:first-child) {
   animation-name: flex;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+}
+
+.lozenge {
+  max-width: 165px;
+  white-space: nowrap !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.SingleDatePicker_picker {
+    z-index: 500;
 }
