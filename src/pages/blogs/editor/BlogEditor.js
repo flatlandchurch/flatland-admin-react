@@ -204,7 +204,7 @@ export default class BlogEditor extends React.Component {
         {
           this.state.post.image &&
           <div className="saved-image">
-            <img src={this.state.post.image} />
+            <img src={this.state.post.image} alt="Selected post image" />
           </div>
         }
         <div className="image-search">
@@ -228,7 +228,7 @@ export default class BlogEditor extends React.Component {
                   role="button"
                   onClick={this.handleImageClick(image)}
                 >
-                  <img src={image.urls.thumb} />
+                  <img src={image.urls.thumb} alt={`Potential post image from unsplash, option ${idx + 1}`} />
                 </div>
               ))
             }
