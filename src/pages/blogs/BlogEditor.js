@@ -13,6 +13,7 @@ import {
 import SimpleMDE from 'simplemde';
 import moment from 'moment';
 import slugify from 'slugify';
+import qs from 'qs';
 
 import removeRegex from '../../utils/removeRegex';
 
@@ -25,6 +26,9 @@ export default class BlogEditor extends React.Component {
 
   constructor(props) {
     super(props);
+
+    const queryStringRaw = window.location.search.replace('?', '');
+
     this.state = {
       mde: null,
       title: '',
@@ -40,6 +44,7 @@ export default class BlogEditor extends React.Component {
       saving: false,
       loading: true,
       hideLoader: false,
+      query: qs.parse(queryStringRaw),
     };
     this.typeTitle = props.match.params.permalink === 'new' ? 'Create' : 'Edit';
   }
@@ -235,6 +240,16 @@ export default class BlogEditor extends React.Component {
           <div className="shuffle-pic">
             <Button onClick={this.getNextPicture}>Get New Picture</Button>
           </div>
+        }
+        {
+          this.state.query && this.state.query.status &&
+            <div className="status-toast-row">
+              {
+                this.state.query.status === 'saved' ?
+                  <div className="toast"><i className="material-icons">saved</i> Saved!</div> :
+                  <div className="toast"><i className="material-icons">public</i> Created!</div>
+              }
+            </div>
         }
         <Jumbotron
           title={`${this.typeTitle} Post`}

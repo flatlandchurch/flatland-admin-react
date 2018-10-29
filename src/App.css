@@ -134,3 +134,12 @@ table.list td:not(:first-child) {
 .SingleDatePicker_picker {
     z-index: 500;
 }
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 28px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
