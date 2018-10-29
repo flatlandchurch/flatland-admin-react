@@ -1,11 +1,12 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Menu, Button } from '@flatland/chokhmah';
 import cx from 'classnames';
 
 import Login from './login/Login';
 import BlogList from './blogs/BlogList';
 import BlogEditor from './blogs/BlogEditor';
+import BlogCreate from './blogs/create';
 import SermonList from './sermons/SermonList';
 import SermonEditor from './sermons/SermonEditor';
 import SeriesList from './series/SeriesList';
@@ -73,13 +74,20 @@ export default class Page extends React.Component {
             onClick={this.toggleMenu}
           />
         }
-        <Route path="/dashboard" render={() => (<div style={{textAlign: 'center'}}><h1>Flatland Admin</h1></div>)}/>
-        <Route exact path="/blog" component={BlogList}/>
-        <Route path="/blog/:permalink" component={BlogEditor}/>
-        <Route exact path="/sermons" component={SermonList} />
-        <Route path="/sermons/:permalink" component={SermonEditor} />
-        <Route exact path="/series" component={SeriesList} />
-        <Route path="/series/:permalink" component={SeriesEditor} />
+        <Switch>
+          <Route path="/dashboard" render={() => (<div style={{textAlign: 'center'}}><h1>Flatland Admin</h1></div>)}/>
+          <Route exact path="/blog" component={BlogList}/>
+          <Route static path="/blog/new" component={BlogCreate}/>
+          <Route path="/blog/:permalink" component={BlogEditor}/>
+          <Route exact path="/sermons" component={SermonList} />
+          <Route path="/sermons/:permalink" component={SermonEditor} />
+          <Route exact path="/series" component={SeriesList} />
+          <Route path="/series/:permalink" component={SeriesEditor} />
+        </Switch>
+        <footer>
+          <p>&copy; Flatland Church {new Date().getFullYear()}</p>
+          <p>Version {process.env.REACT_APP_VERSION}</p>
+        </footer>
       </React.Fragment>
     );
 
