@@ -52,7 +52,7 @@ export default class BlogCreate extends React.Component {
             if (post.published && post.topics && post.topics.devotionals) {
               fetch('https://api.flatlandchurch.com/v2/emails/devotional?key=202f1c42-7054-46ee-8ca2-ddc85f9c789b', {
                 body: JSON.stringify({
-                  permalink: data.permalink,
+                  permalink,
                   userId: JSON.parse(window.localStorage.getItem('flatland:adminUser') || '{}').id
                 }),
                 method: 'POST',
