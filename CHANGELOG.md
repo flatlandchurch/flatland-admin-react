@@ -22,6 +22,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [0.2.1] 2018-10-30
+
+### Fixed
+* Fixed an issue where devotionals were not getting sent out when a blog post gets created.
+
 ## [0.2.0] 2018-10-28
 
 ### Added
