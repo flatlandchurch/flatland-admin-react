@@ -192,19 +192,21 @@
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.8.tgz#38a936b60b898a1ad0f3719543ff1a1031f60f8b"
 
-"@flatland/chokhmah@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@flatland/chokhmah/-/chokhmah-1.4.1.tgz#620159d47f2b03cf02b9818680767c7dd6932f91"
+"@flatland/chokhmah@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@flatland/chokhmah/-/chokhmah-1.9.1.tgz#a3388a50243456b39f9f5c70aed79dfa20c07ac6"
+  integrity sha512-JJcMTPjtUqz3Xb0oGTfavpVYRUREIZZQhlK8Ctcv4B0zcxU3sEuBV98swnyCThq5CpcjOYPRYXpz3eTWhkesnw==
   dependencies:
     classnames "^2.2.5"
     fast-average-color "^4.2.0"
+    lodash-es "^4.17.11"
     marked "^0.5.0"
     prop-types "^15.6.0"
     react "16.3.2"
     react-aria-modal "^2.6.0"
     react-css-modules "^4.7.7"
     react-dates "^14.0.0"
-    react-dom "16.3.2"
+    react-dom "16.3.3"
     react-lazy-load-image-component "^1.1.2"
     react-router-dom "^4.3.1"
     uuid "^3.3.2"
@@ -4635,6 +4637,11 @@ lodash-es@^4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
 
+lodash-es@^4.17.11:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
+  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
@@ -6130,9 +6137,10 @@ react-displace@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-displace/-/react-displace-2.3.0.tgz#6915f8f2f279a29a7b58442405c26edc3d441429"
 
-react-dom@16.3.2:
-  version "16.3.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.2.tgz#cb90f107e09536d683d84ed5d4888e9640e0e4df"
+react-dom@16.3.3:
+  version "16.3.3"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.3.tgz#af4c2aef9f6a66251a46da50253c860a67ae66d9"
+  integrity sha512-ALCp7ZbSGkqRDtQoZozKVNgwXMxbxf/IGOUMC2A0yF6JHeZrS8e2cOotPT87Vf4b7PKCuUVKU4/RDEXxToA/yA==
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
