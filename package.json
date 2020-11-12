@@ -6,7 +6,7 @@
     "@flatland/chokhmah": "^1.4.1",
     "classnames": "^2.2.6",
     "dotenv": "^6.0.0",
-    "firebase": "^5.4.2",
+    "firebase": "^7.14.0",
     "history": "^4.7.2",
     "lodash-es": "^4.17.10",
     "moment": "^2.22.2",
